@@ -10,30 +10,26 @@ import java.nio.file.Path;
 
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toMap;
 import static java.util.function.Function.identity;
 
 public final class WordCounterUtil {
 
-    private static final String pattern = "[^a-яА-Яa-zA-Z]+";
-
     public WordCounterUtil() {
     }
 
     public static Map<String, Integer> calcFrequency(Path path) throws IOException {
-        return Files.readAllLines(path).stream()
-                .map(WordCounterUtil::removeHtmlCode)
-                .flatMap(Pattern.compile(pattern)::splitAsStream)
+        StringBuilder sb = new StringBuilder();
+        Files.readAllLines(path)
+                .forEach(str -> sb.append(str).append("\n"));
+        String title = String.valueOf(sb);
+        Document doc = Jsoup.parse(title);
+        String text = doc.body().text();
+        return Stream.of(text.split("[^a-яА-Яa-zA-Z]"))
                 .collect(toMap(identity(), it -> 1, Integer::sum));
     }
 
-    public static String removeHtmlCode(String str) {
-        Document doc = Jsoup.parse(str);
-        String text = doc.body().text();
-        text = text.replaceAll("«", "");
-        text = text.replaceAll("»", "");
-        text = text.replaceAll("©", "");
-        return text;
-    }
+
 }
