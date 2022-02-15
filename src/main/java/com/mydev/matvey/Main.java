@@ -1,7 +1,6 @@
 package com.mydev.matvey;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Map;
 import java.util.Scanner;
 
