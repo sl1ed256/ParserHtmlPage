@@ -31,5 +31,4 @@ public final class WordCounterUtil {
                 .collect(toMap(identity(), it -> 1, Integer::sum));
     }
 
-
 }

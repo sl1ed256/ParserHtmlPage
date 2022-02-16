@@ -16,6 +16,7 @@ public class Main {
         input.close();
         DownloadPage downloadPage = new DownloadPage();
         Map<String, Integer> wordsMap = WordCounterUtil.calcFrequency(downloadPage.connectPage(url, path));
+
         for (Map.Entry<String, Integer> entry : wordsMap.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
