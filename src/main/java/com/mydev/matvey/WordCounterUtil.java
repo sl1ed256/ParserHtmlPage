@@ -23,11 +23,11 @@ public final class WordCounterUtil {
     public static Map<String, Integer> calcFrequency(Path path) throws IOException {
         StringBuilder sb = new StringBuilder();
         Files.readAllLines(path)
-                .forEach(str -> sb.append(str).append("\n"));
+                .forEach(sb::append);
         String title = String.valueOf(sb);
         Document doc = Jsoup.parse(title);
         String text = doc.body().text();
-        return Stream.of(text.split("[^a-яА-Яa-zA-Z]"))
+        return Stream.of(text.split("\\P{L}+"))
                 .collect(toMap(identity(), it -> 1, Integer::sum));
     }
 
