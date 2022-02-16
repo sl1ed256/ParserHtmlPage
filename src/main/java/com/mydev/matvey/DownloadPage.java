@@ -16,17 +16,17 @@ public class DownloadPage {
 
     private String html;
 
-    public Path readPage(String url) {
+    public Path connectPage(String url, Path path) {
         try {
             html = Jsoup.connect(url).get().html();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return savePage(html);
+        return savePage(html, path);
     }
 
-    public Path savePage(String page) {
-        Path resultPath = Path.of("src", "main", "resources", "result.html");
+    public Path savePage(String page, Path path) {
+        Path resultPath = Path.of(String.valueOf(path), "result.html");
         byte[] strToBytes = page.getBytes();
         try {
             Files.write(resultPath, strToBytes, CREATE, TRUNCATE_EXISTING);
