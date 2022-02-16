@@ -1,5 +1,6 @@
 package com.mydev.matvey;
 
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -16,6 +17,8 @@ import static java.util.function.Function.identity;
 
 public final class WordCounterUtil {
 
+    private static final Logger log = Logger.getLogger(WordCounterUtil.class);
+
     public WordCounterUtil() {
     }
 
@@ -26,6 +29,7 @@ public final class WordCounterUtil {
         String title = String.valueOf(sb);
         Document doc = Jsoup.parse(title);
         String text = doc.body().text();
+        log.info("Clear text received");
         return Stream.of(text.split("\\P{L}+"))
                 .collect(toMap(identity(), it -> 1, Integer::sum));
     }
