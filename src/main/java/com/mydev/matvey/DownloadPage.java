@@ -14,26 +14,30 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public class DownloadPage {
 
-    private String html;
+    public void connectPage(String url, Path path) {
 
-    public Path connectPage(String url, Path path) {
+        if (url.equals("") || path == null) {
+            throw new RuntimeException("Invalid input parameters");
+        }
+
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "http://" + url;
+        }
+
         try {
-            html = Jsoup.connect(url).get().html();
+            String html = Jsoup.connect(url).get().html();
+            savePage(html, path);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return savePage(html, path);
     }
 
-    public Path savePage(String page, Path path) {
-        Path resultPath = Path.of(String.valueOf(path), "result.html");
-        byte[] strToBytes = page.getBytes();
+    public void savePage(String page, Path path) {
         try {
-            Files.write(resultPath, strToBytes, CREATE, TRUNCATE_EXISTING);
+            byte[] strToBytes = page.getBytes();
+            Files.write(path, strToBytes, CREATE, TRUNCATE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return resultPath;
     }
-
 }
