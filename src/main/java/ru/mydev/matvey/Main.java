@@ -1,4 +1,4 @@
-package com.mydev.matvey;
+package ru.mydev.matvey;
 
 
 import java.nio.file.Path;

@@ -1,4 +1,4 @@
-package com.mydev.matvey;
+package ru.mydev.matvey;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
