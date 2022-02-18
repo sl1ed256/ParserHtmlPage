@@ -8,9 +8,8 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 
 
-public class Main {
+class Main {
 
-    // Инициализация логера
     private static final Logger log = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
@@ -28,7 +27,6 @@ public class Main {
         input.close();
 
         try {
-
             DownloadPage downloadPage = new DownloadPage();
             downloadPage.connectPage(url, path);
             log.info("connectPage completed");
@@ -38,7 +36,7 @@ public class Main {
         }
 
         try {
-            Map<String, Integer> wordsMap = WordCounterUtil.calcFrequency(path);
+            Map<String, Integer> wordsMap = HtmlWordCounterUtil.calcFrequency(path);
             System.out.println("Word frequency statistics:");
             for (Map.Entry<String, Integer> entry : wordsMap.entrySet()) {
                 System.out.println(entry.getKey() + " - " + entry.getValue());

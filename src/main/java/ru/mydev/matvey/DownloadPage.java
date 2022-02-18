@@ -13,16 +13,26 @@ import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 
-public class DownloadPage {
+class DownloadPage {
 
-    // Инициализация логера
     private static final Logger log = Logger.getLogger(DownloadPage.class);
 
+    /**
+     * Establishes connection with url and gets page html code
+     *
+     * @param url  Page url string
+     * @param path Where to save the file
+     */
     public void connectPage(String url, Path path) {
 
-        if (url.equals("") || path == null) {
-            log.error("Empty url or path");
-            throw new RuntimeException("Invalid input parameters");
+        if (url == null || path == null) {
+            log.error("Null url or path");
+            throw new NullPointerException("Null parameters");
+        }
+
+        if (url.length() == 0) {
+            log.error("Empty url");
+            throw new RuntimeException("Empty url");
         }
 
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
@@ -40,6 +50,12 @@ public class DownloadPage {
         }
     }
 
+    /**
+     * Saves the resulting HTML text to file
+     *
+     * @param page String of html text
+     * @param path Where to save the file
+     */
     public void savePage(String page, Path path) {
         try {
             byte[] strToBytes = page.getBytes();
