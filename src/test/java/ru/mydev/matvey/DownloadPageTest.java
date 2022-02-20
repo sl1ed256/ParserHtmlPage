@@ -3,6 +3,7 @@ package ru.mydev.matvey;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.net.MalformedURLException;
 import java.nio.file.Path;
 
 class DownloadPageTest {
@@ -17,7 +18,7 @@ class DownloadPageTest {
 
     @Test
     void ifUrlIsEmpty() {
-        Assertions.assertThrows(RuntimeException.class,
+        Assertions.assertThrows(MalformedURLException.class,
                 () -> downloadPage.connectPage("", Path.of("src")), "Empty url");
     }
 }

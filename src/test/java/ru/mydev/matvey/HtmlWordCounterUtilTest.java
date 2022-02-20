@@ -15,7 +15,7 @@ class HtmlWordCounterUtilTest {
     @Test
     void throwExceptionIfFileIsEmpty() {
         Path pathEmptyFile = Path.of("src", "test", "resources", "EmptyFile.html");
-        assertThrows(RuntimeException.class, () -> HtmlWordCounterUtil.calcFrequency(pathEmptyFile), "File is empty");
+        assertThrows(IOException.class, () -> HtmlWordCounterUtil.calcFrequency(pathEmptyFile), "File is empty");
     }
 
     @Test

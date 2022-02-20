@@ -40,7 +40,7 @@ class HtmlWordCounterUtil {
                     .collect(toMap(identity(), it -> 1, Integer::sum));
         } else {
             log.error("File is empty");
-            throw new RuntimeException("File is empty");
+            throw new IOException("File is empty");
         }
     }
 

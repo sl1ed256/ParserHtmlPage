@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -23,7 +24,7 @@ class DownloadPage {
      * @param url  Page url string
      * @param path Where to save the file
      */
-    public void connectPage(String url, Path path) {
+    public void connectPage(String url, Path path) throws MalformedURLException {
 
         if (url == null || path == null) {
             log.error("Null url or path");
@@ -32,7 +33,7 @@ class DownloadPage {
 
         if (url.length() == 0) {
             log.error("Empty url");
-            throw new RuntimeException("Empty url");
+            throw new MalformedURLException("Empty url");
         }
 
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
