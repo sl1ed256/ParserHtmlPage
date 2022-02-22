@@ -19,7 +19,7 @@ class HtmlWordCounterUtil {
 
     private static final Logger log = Logger.getLogger(HtmlWordCounterUtil.class);
 
-    public HtmlWordCounterUtil() {
+    private HtmlWordCounterUtil() {
     }
 
     /**
